@@ -19,7 +19,7 @@ namespace DAL
             try
             {
               
-                cn.ConnectionString = "Data Source=DESKTOP-V4V6Q6M;Initial Catalog=LOJADB;Integrated Security=True;Encrypt=False;Trust Server Certificate=True";
+                cn.ConnectionString = Dados.StringDeConexao();
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = cn;
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -72,7 +72,7 @@ namespace DAL
             SqlConnection cn = new SqlConnection();
             try
             {
-             cn.ConnectionString = "Data Source=DESKTOP-V4V6Q6M;Initial Catalog=LOJADB;Integrated Security=True;Encrypt=False;Trust Server Certificate=True";
+             cn.ConnectionString = Dados.StringDeConexao();
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = cn;
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -120,7 +120,7 @@ namespace DAL
             SqlConnection cn = new SqlConnection();
             try
             {
-                cn.ConnectionString = "Data Source=DESKTOP-V4V6Q6M;Initial Catalog=LOJADB;Integrated Security=True;Encrypt=False;Trust Server Certificate=True";
+                cn.ConnectionString = Dados.StringDeConexao();
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = cn;
 
@@ -150,5 +150,42 @@ namespace DAL
                 cn.Close();
             }
         }
+
+
+        public DataTable Listagem(string filtro)
+        {
+            SqlConnection cn = new SqlConnection();
+            SqlDataAdapter da = new SqlDataAdapter();
+            DataTable dt = new DataTable();
+            try
+            {
+                cn.ConnectionString = Dados.StringDeConexao();
+                //adapter
+                da.SelectCommand = new SqlCommand();
+                da.SelectCommand.CommandText = "seleciona_clientes";
+                da.SelectCommand.Connection = cn;
+                da.SelectCommand.CommandType = CommandType.StoredProcedure;
+
+                //PARAMETROS DO FILTRO
+                SqlParameter pfiltro;
+                pfiltro = da.SelectCommand.Parameters.Add("@filtro", SqlDbType.Text);
+                pfiltro.Value = filtro;
+                da.Fill(dt);
+                return dt;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
+
+
+
+        }
+
+
+
+
     }
 }
