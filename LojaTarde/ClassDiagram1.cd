@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Modelos.ClientesInformation">
+    <Position X="0.5" Y="0.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAgSAQAAAAAAAAAAAAAAgAAAAAAAAAAAEAAAE=</HashCode>
+      <FileName>ClientesInformation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Modelos.ProdutosInformation">
+    <Position X="4.75" Y="0.5" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAIAAgAQAQAAAAAAAAAAAAAAAAAAAAACAEAAEAAAA=</HashCode>
+      <FileName>ProdutosInformation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Modelos.VendasInformation">
+    <Position X="9.75" Y="1" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>QAACAAAABQAQAAAAAAIAAAAAAAAAQRAACAAQAAAAAAA=</HashCode>
+      <FileName>VendasInformation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
