@@ -7,23 +7,21 @@ using System.Threading.Tasks;
 using Microsoft.Data.SqlClient;
 using Modelos;
 
-namespace DAL 
-{                                                                                                                                                                                                                                                                                                                                                                          
-    public class ClientesDAL
+namespace DAL
+{
+    public class ProdutosDAL
     {
-       
-        public void Incluir(ClientesInformation clientes)
+        public void Incluir(ProdutosInformation produtos)
         {
-            //CONEXÃO
             SqlConnection cn = new SqlConnection();
             try
             {
-              
+
                 cn.ConnectionString = Dados.StringDeConexao();
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = cn;
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "Insere_Clientes";
+                cmd.CommandText = "Insere_Produtos";
 
                 //PARAMETROS DA STORED PROCEDURE
                 SqlParameter pcodigo = new SqlParameter("@codigo", SqlDbType.Int);
@@ -34,19 +32,19 @@ namespace DAL
                 pnome.Direction = ParameterDirection.Output;
                 cmd.Parameters.Add(pnome);
 
-                SqlParameter pemail = new SqlParameter("@email", SqlDbType.VarChar, 100);
-                pemail.Direction = ParameterDirection.Output;
-                cmd.Parameters.Add(pemail);
+                SqlParameter ppreco = new SqlParameter("@preco", SqlDbType.Decimal, 10-2);
+                ppreco.Direction = ParameterDirection.Output;
+                cmd.Parameters.Add(ppreco);
 
-                SqlParameter ptelefone = new SqlParameter("@telefone", SqlDbType.VarChar, 80);
-                ptelefone.Direction = ParameterDirection.Output;
-                cmd.Parameters.Add(ptelefone);
+                SqlParameter pestoque = new SqlParameter("@estoque", SqlDbType.Int);
+                pestoque.Direction = ParameterDirection.Output;
+                cmd.Parameters.Add(pestoque);
 
                 cn.Open();
                 cmd.ExecuteNonQuery();
 
-                clientes.Codigo = (Int32)cmd.Parameters["@codigo"].Value;
-            }   
+                produtos.Codigo = (Int32)cmd.Parameters["@codigo"].Value;
+            }
 
             catch (Exception ex)
             {
@@ -62,18 +60,20 @@ namespace DAL
 
 
         }
+
         //-----------------------------------------------------------------------------------//
-        public void Alterar(ClientesInformation clientes)
+        public void Alterar(ProdutosInformation produtos)
         {
             //CONEXÃO 
             SqlConnection cn = new SqlConnection();
             try
             {
-             cn.ConnectionString = Dados.StringDeConexao();
+
+                cn.ConnectionString = Dados.StringDeConexao();
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = cn;
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "altera_Clientes";
+                cmd.CommandText = "Insere_Produtos";
 
                 //PARAMETROS DA STORED PROCEDURE
                 SqlParameter pcodigo = new SqlParameter("@codigo", SqlDbType.Int);
@@ -84,20 +84,20 @@ namespace DAL
                 pnome.Direction = ParameterDirection.Output;
                 cmd.Parameters.Add(pnome);
 
-                SqlParameter pemail = new SqlParameter("@email", SqlDbType.VarChar, 100);
-                pemail.Direction = ParameterDirection.Output;
-                cmd.Parameters.Add(pemail);
+                SqlParameter ppreco = new SqlParameter("@preco", SqlDbType.Decimal, 10-2);
+                ppreco.Direction = ParameterDirection.Output;
+                cmd.Parameters.Add(ppreco);
 
-                SqlParameter ptelefone = new SqlParameter("@telefone", SqlDbType.VarChar, 80);
-                ptelefone.Direction = ParameterDirection.Output;
-                cmd.Parameters.Add(ptelefone);
+                SqlParameter pestoque = new SqlParameter("@estoque", SqlDbType.Int);
+                pestoque.Direction = ParameterDirection.Output;
+                cmd.Parameters.Add(pestoque);
 
                 cn.Open();
-
                 cmd.ExecuteNonQuery();
-                clientes.Codigo = (Int32)cmd.Parameters["@codigo"].Value;
 
+                produtos.Codigo = (Int32)cmd.Parameters["@codigo"].Value;
             }
+
             catch (Exception ex)
             {
 
@@ -120,7 +120,7 @@ namespace DAL
                 cmd.Connection = cn;
 
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "Exclui_Clientes";
+                cmd.CommandText = "Exclui_Produtos";
 
                 //PARAMETROS DO CÓDIGO
                 SqlParameter pcodigo = new SqlParameter("@codigo", SqlDbType.Int);
@@ -129,9 +129,9 @@ namespace DAL
 
                 cn.Open();
                 int resultado = cmd.ExecuteNonQuery();
-                if(resultado !=1)
+                if (resultado != 1)
                 {
-                    throw new Exception("Não foi possível excluir o cliente" + codigo);
+                    throw new Exception("Não foi possível excluir o produto" + codigo);
                 }
 
             }
@@ -156,7 +156,7 @@ namespace DAL
                 cn.ConnectionString = Dados.StringDeConexao();
                 //adapter
                 da.SelectCommand = new SqlCommand();
-                da.SelectCommand.CommandText = "Seleciona_Clientes";
+                da.SelectCommand.CommandText = "Seleciona_Produtos";
                 da.SelectCommand.Connection = cn;
                 da.SelectCommand.CommandType = CommandType.StoredProcedure;
 
@@ -170,9 +170,9 @@ namespace DAL
             catch (Exception ex)
             {
 
-                throw new Exception ("Erro servidor SQL: " + ex.Message);
+                throw new Exception("Erro servidor SQL: " + ex.Message);
             }
-             finally
+            finally
             {
                 cn.Close();
             }

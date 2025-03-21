@@ -7,46 +7,52 @@ using System.Threading.Tasks;
 using Microsoft.Data.SqlClient;
 using Modelos;
 
-namespace DAL 
-{                                                                                                                                                                                                                                                                                                                                                                          
-    public class ClientesDAL
+namespace DAL
+{
+    public class VendasDAL
     {
-       
-        public void Incluir(ClientesInformation clientes)
+        public void Incluir(VendasInformation vendas)
         {
-            //CONEXÃO
             SqlConnection cn = new SqlConnection();
             try
             {
-              
+
                 cn.ConnectionString = Dados.StringDeConexao();
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = cn;
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "Insere_Clientes";
+                cmd.CommandText = "Insere_Vendas";
 
                 //PARAMETROS DA STORED PROCEDURE
                 SqlParameter pcodigo = new SqlParameter("@codigo", SqlDbType.Int);
                 pcodigo.Direction = ParameterDirection.Output;
                 cmd.Parameters.Add(pcodigo);
 
-                SqlParameter pnome = new SqlParameter("@nome", SqlDbType.VarChar, 100);
-                pnome.Direction = ParameterDirection.Output;
-                cmd.Parameters.Add(pnome);
+                SqlParameter pdata = new SqlParameter("@data", SqlDbType.Date);
+                pdata.Direction = ParameterDirection.Output;
+                cmd.Parameters.Add(pdata);
 
-                SqlParameter pemail = new SqlParameter("@email", SqlDbType.VarChar, 100);
-                pemail.Direction = ParameterDirection.Output;
-                cmd.Parameters.Add(pemail);
+                SqlParameter pquantidade = new SqlParameter("@quantidade", SqlDbType.Int);
+                pquantidade.Direction = ParameterDirection.Output;
+                cmd.Parameters.Add(pquantidade);
 
-                SqlParameter ptelefone = new SqlParameter("@telefone", SqlDbType.VarChar, 80);
-                ptelefone.Direction = ParameterDirection.Output;
-                cmd.Parameters.Add(ptelefone);
+                SqlParameter pfaturado = new SqlParameter("@faturado", SqlDbType.Bit);
+                pfaturado.Direction = ParameterDirection.Output;
+                cmd.Parameters.Add(pfaturado);
+
+                SqlParameter pcodigocliente = new SqlParameter("@codigocliente", SqlDbType.Int);
+                pcodigocliente.Direction = ParameterDirection.Output;
+                cmd.Parameters.Add(pcodigocliente);
+
+                SqlParameter pcodigoproduto = new SqlParameter("@codigoproduto", SqlDbType.Int);
+                pcodigoproduto.Direction = ParameterDirection.Output;
+                cmd.Parameters.Add(pcodigoproduto);
 
                 cn.Open();
                 cmd.ExecuteNonQuery();
 
-                clientes.Codigo = (Int32)cmd.Parameters["@codigo"].Value;
-            }   
+                vendas.Codigo = (Int32)cmd.Parameters["@codigo"].Value;
+            }
 
             catch (Exception ex)
             {
@@ -57,47 +63,50 @@ namespace DAL
             {
                 cn.Close();
             }
-
-
-
-
         }
         //-----------------------------------------------------------------------------------//
-        public void Alterar(ClientesInformation clientes)
+        public void Alterar(VendasInformation vendas)
         {
-            //CONEXÃO 
             SqlConnection cn = new SqlConnection();
             try
             {
-             cn.ConnectionString = Dados.StringDeConexao();
+                cn.ConnectionString = Dados.StringDeConexao();
                 SqlCommand cmd = new SqlCommand();
                 cmd.Connection = cn;
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "altera_Clientes";
+                cmd.CommandText = "Altera_Vendas";
 
                 //PARAMETROS DA STORED PROCEDURE
                 SqlParameter pcodigo = new SqlParameter("@codigo", SqlDbType.Int);
                 pcodigo.Direction = ParameterDirection.Output;
                 cmd.Parameters.Add(pcodigo);
 
-                SqlParameter pnome = new SqlParameter("@nome", SqlDbType.VarChar, 100);
-                pnome.Direction = ParameterDirection.Output;
-                cmd.Parameters.Add(pnome);
+                SqlParameter pdata = new SqlParameter("@data", SqlDbType.Date);
+                pdata.Direction = ParameterDirection.Output;
+                cmd.Parameters.Add(pdata);
 
-                SqlParameter pemail = new SqlParameter("@email", SqlDbType.VarChar, 100);
-                pemail.Direction = ParameterDirection.Output;
-                cmd.Parameters.Add(pemail);
+                SqlParameter pquantidade = new SqlParameter("@quantidade", SqlDbType.Int);
+                pquantidade.Direction = ParameterDirection.Output;
+                cmd.Parameters.Add(pquantidade);
 
-                SqlParameter ptelefone = new SqlParameter("@telefone", SqlDbType.VarChar, 80);
-                ptelefone.Direction = ParameterDirection.Output;
-                cmd.Parameters.Add(ptelefone);
+                SqlParameter pfaturado = new SqlParameter("@faturado", SqlDbType.Bit);
+                pfaturado.Direction = ParameterDirection.Output;
+                cmd.Parameters.Add(pfaturado);
+
+                SqlParameter pcodigocliente = new SqlParameter("@codigocliente", SqlDbType.Int);
+                pcodigocliente.Direction = ParameterDirection.Output;
+                cmd.Parameters.Add(pcodigocliente);
+
+                SqlParameter pcodigoproduto = new SqlParameter("@codigoproduto", SqlDbType.Int);
+                pcodigoproduto.Direction = ParameterDirection.Output;
+                cmd.Parameters.Add(pcodigoproduto);
 
                 cn.Open();
-
                 cmd.ExecuteNonQuery();
-                clientes.Codigo = (Int32)cmd.Parameters["@codigo"].Value;
 
+                vendas.Codigo = (Int32)cmd.Parameters["@codigo"].Value;
             }
+
             catch (Exception ex)
             {
 
@@ -120,7 +129,7 @@ namespace DAL
                 cmd.Connection = cn;
 
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.CommandText = "Exclui_Clientes";
+                cmd.CommandText = "Exclui_Vendas";
 
                 //PARAMETROS DO CÓDIGO
                 SqlParameter pcodigo = new SqlParameter("@codigo", SqlDbType.Int);
@@ -129,11 +138,10 @@ namespace DAL
 
                 cn.Open();
                 int resultado = cmd.ExecuteNonQuery();
-                if(resultado !=1)
+                if (resultado != 1)
                 {
-                    throw new Exception("Não foi possível excluir o cliente" + codigo);
+                    throw new Exception("Não foi possível excluir a venda" + codigo);
                 }
-
             }
             catch (Exception ex)
             {
@@ -156,7 +164,7 @@ namespace DAL
                 cn.ConnectionString = Dados.StringDeConexao();
                 //adapter
                 da.SelectCommand = new SqlCommand();
-                da.SelectCommand.CommandText = "Seleciona_Clientes";
+                da.SelectCommand.CommandText = "Seleciona_Vendas";
                 da.SelectCommand.Connection = cn;
                 da.SelectCommand.CommandType = CommandType.StoredProcedure;
 
@@ -170,9 +178,9 @@ namespace DAL
             catch (Exception ex)
             {
 
-                throw new Exception ("Erro servidor SQL: " + ex.Message);
+                throw new Exception("Erro servidor SQL: " + ex.Message);
             }
-             finally
+            finally
             {
                 cn.Close();
             }
