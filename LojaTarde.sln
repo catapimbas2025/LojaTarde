@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BLL", "DLL\BLL.csproj", "{358BC2E4-E944-43F5-887D-03E9A31DB98F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UILoja", "UILoja\UILoja.csproj", "{A2A6AFFE-EA4E-46FB-82A9-E746D2E3FF47}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,8 +29,15 @@ Global
 		{358BC2E4-E944-43F5-887D-03E9A31DB98F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{358BC2E4-E944-43F5-887D-03E9A31DB98F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{358BC2E4-E944-43F5-887D-03E9A31DB98F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2A6AFFE-EA4E-46FB-82A9-E746D2E3FF47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2A6AFFE-EA4E-46FB-82A9-E746D2E3FF47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2A6AFFE-EA4E-46FB-82A9-E746D2E3FF47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2A6AFFE-EA4E-46FB-82A9-E746D2E3FF47}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C6330B9F-D991-4563-BA62-3A1720B42161}
 	EndGlobalSection
 EndGlobal

@@ -57,7 +57,7 @@ namespace BLL
             }
             //SE TUDO ESTIVER CORRRETO, CHAM A ROTINA PARA INSERIR
             ProdutosDAL obj = new ProdutosDAL();
-            obj.Incluir(produtos);
+            obj.Alterar(produtos);
         }
         public void Excluir(int codigo)
         {

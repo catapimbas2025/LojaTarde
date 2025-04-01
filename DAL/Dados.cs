@@ -11,7 +11,7 @@ namespace DAL
      public static string StringDeConexao()
         {
             {
-                return "Data Source=DESKTOP-V4V6Q6M;Initial Catalog=LOJADB;Integrated Security=True;Encrypt=False;Trust Server Certificate=True";
+                return "Data Source=DESKTOP-OMTIDSQ;Initial Catalog=LOJADB;Integrated Security=True;Encrypt=False;Trust Server Certificate=True";
             }
 
 
